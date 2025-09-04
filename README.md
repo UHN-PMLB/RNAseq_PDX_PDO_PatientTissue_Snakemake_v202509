@@ -1,4 +1,4 @@
-# RNAseq PDX PDO PatientTissue Snakemake Workflow 
+# RNAseq Snakemake Workflow
 
 version202509
 
