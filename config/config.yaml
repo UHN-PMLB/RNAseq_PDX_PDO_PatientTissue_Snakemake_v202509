@@ -15,11 +15,11 @@ ref_index:
   genome: "ref/genomes/human/GRCh38/genome.fa"
   # Path to RSEM reference directory (contains genome reference for quantification). 
   # If missing, workflow will run rsem-prepare-reference to generate reference.seq
-  rsem: "ref/RSEM/GRCh38/"
+  rsem: "ref/genomes/human/GRCh38/RSEM/"
 
 star:
   # reference genome used by STAR alignement, GRCh38
-  star-genome: "/cluster/projects/cesconlab/References/STAR/STAR_GRCh38_150"
+  star-genome: "ref/genomes/human/GRCh38/STAR/STAR_GRCh38_150"
   # reference genome annotation used by STAR alignment, GRCh38
   gtf: "ref/genomes/human/GRCh38/GTF/genome.gtf"
   # Extra parameters to pass to STAR (optional).
