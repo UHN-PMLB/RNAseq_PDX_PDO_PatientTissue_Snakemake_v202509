@@ -1,0 +1,4 @@
+sample_name	sample_type	single_pair_end	fq1	fq2
+REF039	PDX	pe	cluster/projects/cesconlab/collaborations/CesconPDX/RNASeq/data/REF039P1_PDX_RNA_R1_001.fastq.gz	/cluster/projects/cesconlab/collaborations/CesconPDX/RNASeq/data/REF039P1_PDX_RNA_R2_001.fastq.gz
+BPTO180	PDO	pe	/cluster/projects/cesconlab/SEQUENCES/organoids/rnaseq/BPTO180/BPTO180_1.fq.gz	/cluster/projects/cesconlab/SEQUENCES/organoids/rnaseq/BPTO180/BPTO180_2.fq.gz
+BPTO180T	PatientTissue	pe	/cluster/projects/cesconlab/SEQUENCES/organoids/rnaseq/BPTO180T/BPTO180T_1.fq.gz	/cluster/projects/cesconlab/SEQUENCES/organoids/rnaseq/BPTO180T/BPTO180T_2.fq.gz
