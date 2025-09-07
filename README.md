@@ -1,42 +1,82 @@
 # RNAseq Snakemake Workflow
 
-version 202509
+**Version: 202509**
 
-## Workflow Overview
+![workflow diagram](images/RNAseq_workflow-diagram.png)
 
-![worflow diagram](images/RNAseq_workflow-diagram.png)
+This workflow provides an end-to-end RNAseq analysis pipeline for **PDX**, **PDO**, and **Patient Tissue** samples, customized for the **HPC4Health Slurm cluster**.  
+It integrates widely used bioinformatics tools with cluster-optimized execution.
 
-RNAseq workflow using fastp, xengsort(optional), star, rsem for PDX, PDO, and patient tissue RNAseq data. Customized for HPC4Health Slurm cluster.
+---
 
-## Workflow Setup
+## 🔍 Workflow Overview
 
-### 1. Snakemake conda environment setup
+The pipeline consists of the following steps:
 
-Login build mode
-```
+1. **Quality Control & Trimming** – `fastp`  
+2. **Host/DNA Filtering (optional)** – `xengsort` (run only for PDX samples)  
+3. **Alignment** – `STAR`
+4. **Alignment Metrics** – `Picard CollectAlignmentSummaryMetrics`  
+5. **Quantification** – `RSEM`
+
+**Inputs:**  
+- FASTQ files (single-end or paired-end)  
+- Human/mouse reference genome, annotations, and indexes (provided separately)
+
+**Outputs:**  
+- QC reports (`results/fastp/`, `results/picard/`)  
+- Aligned BAM files (`results/star/`)  
+- Gene- and transcript-level expression estimates (`results/rsem/`)  
+
+---
+
+## 🛠️ Software Stack
+
+| Tool   | Purpose                                | Version (recommended) |
+|--------|----------------------------------------|-----------------------|
+| fastp  | FASTQ QC and adapter trimming          | 0.23.1                |
+| xengsort | Host/DNA filtering (for PDX samples) | 2.0.9                 |
+| STAR   | RNAseq read alignment                  | 2.7.3a                |
+| RSEM   | Gene/transcript quantification         | 1.3.0                 |
+| Picard | Alignment metrics & RNAseq QC          | 2.10.9                |
+| Snakemake | Workflow engine                     | 6.15.3 (tested)       |
+
+---
+
+## ⚙️ Setup Instructions
+
+### 1. Create Snakemake Environment
+
+Start a build node session:
+```bash
 salloc --partition=build -c 1 -t 2:0:0 --mem 2G
 ```
-Install snakemake (v6.15.3) as a conda environment
-```
+Install Snakemake v6.15.3:
+```bash
 conda install -n base -c conda-forge mamba
 mamba create -c conda-forge -c bioconda -n snakemake6153 snakemake=6.15.3
 ```
-
-### 2. Clone Workflow
-
-Login build mode and clone the workflow to home directory
+Activate the environment:
+```bash
+conda activate snakemake6153
 ```
+
+### 2. Clone Workflow Repository
+
+```bash
 cd ~/workflows
 git clone git@github.com:UHN-PMLB/RNAseq_PDX_PDO_PatientTissue_Snakemake_v202509.git
 ```
-Move the copied workflow directory to your working directory
+Move the cloned workflow into your working directory.
 
 ### 3. Project Directory Setup
-#### 3.1 Login interactive mode
-```
+#### 3.1 Start an interactive session
+
+```bash
 salloc -c 1 -t 2:0:0 --mem 2G
 ```
-#### 3.2 Set up config/samples.tsv
+
+#### 3.2 Configure `config/samples.tsv`
 
 | sample_name | sample_type    | single_pair_end | fq1                           | fq2                           |
 |-------------|----------------|-----------------|-------------------------------|-------------------------------|
@@ -44,23 +84,58 @@ salloc -c 1 -t 2:0:0 --mem 2G
 | SAMPLE002   | PDO            | pe              | /path/to/data/SAMPLE002_R1.fq | /path/to/data/SAMPLE002_R2.fq |
 | SAMPLE003   | PatientTissue  | pe              | /path/to/data/SAMPLE003_R1.fq | /path/to/data/SAMPLE003_R2.fq |
 
-*Note: `sample_type` decides if xengsort step will be skpped (PDO, PatientTissue) or not (PDX).
+- `sample_type` determines whether `xengsort` is run (`PDX = yes`, `PDO/PatientTissue = skipped`).
+- `single_pair_end` should be `se` for `single-end` data, `pe` for `paired-end`.
 
-#### 3.3 Configure workflow/Snakefile
+#### 3.3 Configure `workflow/Snakefile`
 
-Update `workdir` to your working directory
+Update the `workdir` parameter to point to your working directory.
 
-#### 3.4 ref/
+#### 3.4 Reference Data (`ref/`)
 
-ref directory contains all the human and mouse reference genome, annotation and index. Please contact author to transfer the ref/ folder in HPC. 
+The `ref/` directory contains genome FASTA, annotations (GTF), and prebuilt STAR/RSEM indexes.
+Please contact the workflow maintainer to obtain and transfer the reference data to HPC.
 
-### 4. Run the workflow
+---
 
-Activate snakemake environment
+## ▶️ Running the Workflow
+
+### 1. Dry-run (test only, no jobs executed)
+
+```bash
+snakemake -n -p
 ```
-mamba activate snakemake6153
+
+### 2. Run locally with a few cores
+
+```bash
+snakemake --cores 4
 ```
-Run the workflow
-```
+
+### 3. Submit to SLURM
+
+```bash
 sbatch scheduler.sh
 ```
+
+---
+
+## 📂 Output Structure
+
+- results/fastp/ – QC reports in HTML/JSON
+- results/star/ – Aligned BAM files + STAR logs
+- results/picard/ – Alignment metrics (Picard CollectAlignmentSummaryMetrics)
+- results/rsem/ – Gene and transcript quantifications
+
+---
+
+## 📌 Notes
+
+This workflow is optimized for HPC4Health Slurm. Adapt scheduler settings (scheduler.sh) for other clusters.
+
+---
+
+## 👤 Contact
+
+For questions or support, please contact:
+[Guanqiao Feng] – [guanqiao.feng@uhn.ca]
