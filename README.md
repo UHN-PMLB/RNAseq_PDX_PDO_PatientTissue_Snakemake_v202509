@@ -36,4 +36,14 @@ Login interactive mode
 ```
 salloc -c 1 -t 2:0:0 --mem 2G
 ```
-Set up configurations
+Set up samples.tsv file
+
+| sample_name | sample_type    | single_pair_end | fq1                           | fq2                           |
+|-------------|----------------|-----------------|-------------------------------|-------------------------------|
+| SAMPLE001   | PDX            | pe              | /path/to/data/SAMPLE001_R1.fq | /path/to/data/SAMPLE001_R2.fq |
+| SAMPLE002   | PDO            | pe              | /path/to/data/SAMPLE002_R1.fq | /path/to/data/SAMPLE002_R2.fq |
+| SAMPLE003   | PatientTissue  | pe              | /path/to/data/SAMPLE003_R1.fq | /path/to/data/SAMPLE003_R2.fq |
+
+*Note: `sample_type` decides if xengsort step will be skpped (PDO, PatientTissue) or not (PDX).
+
+Configure Snakemake file
