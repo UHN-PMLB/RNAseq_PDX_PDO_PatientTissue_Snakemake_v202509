@@ -1,6 +1,6 @@
 # RNAseq Snakemake Workflow
 
-version202509
+version 202509
 
 ## Workflow Overview
 
@@ -32,11 +32,11 @@ git clone git@github.com:UHN-PMLB/RNAseq_PDX_PDO_PatientTissue_Snakemake_v202509
 Move the copied workflow directory to your working directory
 
 ### 3. Project Directory Setup
-Login interactive mode
+#### 3.1 Login interactive mode
 ```
 salloc -c 1 -t 2:0:0 --mem 2G
 ```
-Set up samples.tsv file
+#### 3.2 Set up config/samples.tsv
 
 | sample_name | sample_type    | single_pair_end | fq1                           | fq2                           |
 |-------------|----------------|-----------------|-------------------------------|-------------------------------|
@@ -46,4 +46,21 @@ Set up samples.tsv file
 
 *Note: `sample_type` decides if xengsort step will be skpped (PDO, PatientTissue) or not (PDX).
 
-Configure Snakemake file
+#### 3.3 Configure workflow/Snakefile
+
+Update `workdir` to your working directory
+
+#### 3.4 ref/
+
+ref directory contains all the human and mouse reference genome, annotation and index. Please contact author to transfer the ref/ folder in HPC. 
+
+### 4. Run the workflow
+
+Activate snakemake environment
+```
+mamba activate snakemake6153
+```
+Run the workflow
+```
+sbatch scheduler.sh
+```
