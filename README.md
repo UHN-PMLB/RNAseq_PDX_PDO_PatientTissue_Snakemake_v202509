@@ -22,10 +22,18 @@ conda install -n base -c conda-forge mamba
 mamba create -c conda-forge -c bioconda -n snakemake6153 snakemake=6.15.3
 ```
 
-### 2. Clone workflow
+### 2. Clone Workflow
 
 Login build mode and clone the workflow to home directory
 ```
 cd ~/workflows
-git clone git@github.com:
+git clone git@github.com:UHN-PMLB/RNAseq_PDX_PDO_PatientTissue_Snakemake_v202509.git
 ```
+Move the copied workflow directory to your working directory
+
+### 3. Project Directory Setup
+Login interactive mode
+```
+salloc -c 1 -t 2:0:0 --mem 2G
+```
+Set up configurations
