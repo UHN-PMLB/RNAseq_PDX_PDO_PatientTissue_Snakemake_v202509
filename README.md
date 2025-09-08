@@ -45,7 +45,8 @@ The pipeline consists of the following steps:
 
 ## ⚙️ Setup Instructions
 
-### 1. Create Snakemake Environment
+### 1. Home Directory Setup
+#### 1.1 Create Snakemake Environment
 
 Start a build node session:
 ```bash
@@ -61,7 +62,7 @@ Activate the environment:
 conda activate snakemake6153
 ```
 
-### 2. Clone Workflow Repository
+#### 1.2 Clone Workflow Repository
 
 ```bash
 cd ~/workflows
@@ -69,7 +70,7 @@ git clone git@github.com:UHN-PMLB/RNAseq_PDX_PDO_PatientTissue_Snakemake_v202509
 ```
 Clone the workflow into home directory first.
 
-### 3. Generate Xengsort Singularity Images (Required for PDX, Optional for PDO, PatientTissue)
+#### 1.3 Generate Xengsort Singularity Images (Required for PDX, Optional for PDO, PatientTissue)
 
 [Singularity Image](https://quay.io/repository/biocontainers/xengsort?tab=tags)
 
@@ -79,15 +80,15 @@ module load apptainer/1.0.2
 apptainer build xengsort209.sif docker://quay.io/biocontainers/xengsort:2.0.9--pyhdfd78af_0
 ```
 
-### 3. Project Directory Setup
-#### 3.1 Start an interactive session
+### 2. Project Directory Setup
+#### 2.1 Start an interactive session
 
 ```bash
 salloc -c 1 -t 2:0:0 --mem 2G
 ```
-Move the cloned workflow into your working directory.
+Move the workflow to your working directory.
 
-#### 3.2 Configure `config/samples.tsv`
+#### 2.2 Configure `config/samples.tsv`
 
 | sample_name | sample_type    | single_pair_end | fq1                           | fq2                           |
 |-------------|----------------|-----------------|-------------------------------|-------------------------------|
@@ -98,11 +99,11 @@ Move the cloned workflow into your working directory.
 - `sample_type` determines whether `xengsort` is run (`PDX = yes`, `PDO/PatientTissue = skipped`).
 - `single_pair_end` should be `se` for `single-end` data, `pe` for `paired-end`.
 
-#### 3.3 Configure `workflow/Snakefile`
+#### 2.3 Configure `workflow/Snakefile`
 
 Update the `workdir` parameter to point to your working directory.
 
-#### 3.4 Reference Data (`ref/`)
+#### 2.4 Reference Data (`ref/`)
 
 The `ref/` directory contains genome FASTA, annotations (GTF), and prebuilt STAR/RSEM indexes.
 Please contact the workflow maintainer to obtain and transfer the reference data to HPC.
