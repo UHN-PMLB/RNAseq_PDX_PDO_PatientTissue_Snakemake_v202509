@@ -67,7 +67,7 @@ conda activate snakemake6153
 cd ~/workflows
 git clone git@github.com:UHN-PMLB/RNAseq_PDX_PDO_PatientTissue_Snakemake_v202509.git
 ```
-Move the cloned workflow into your working directory.
+Clone the workflow into home directory first.
 
 ### 3. Project Directory Setup
 #### 3.1 Start an interactive session
@@ -75,6 +75,7 @@ Move the cloned workflow into your working directory.
 ```bash
 salloc -c 1 -t 2:0:0 --mem 2G
 ```
+Move the cloned workflow into your working directory.
 
 #### 3.2 Configure `config/samples.tsv`
 
