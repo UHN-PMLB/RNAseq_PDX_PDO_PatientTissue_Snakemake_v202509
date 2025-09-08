@@ -114,12 +114,16 @@ After everything is setup, your working directory should have the following stru
 
 ```
 .
+├── LICENSE
+├── README.md
 ├── config
 │   ├── config.yaml
 │   └── samples.tsv
 ├── env
 │   ├── README.md
 │   └── xengsort209.sif
+├── images
+│   └── RNAseq_workflow-diagram.png
 ├── ref
 │   └── genomes
 │       ├── human
@@ -173,7 +177,7 @@ After everything is setup, your working directory should have the following stru
         ├── prepare-rsem-reference.py
         └── rsem-generate-data-matrix-modified.pl
 
-19 directories, 40 files
+20 directories, 43 files
 ```
 
 ---
