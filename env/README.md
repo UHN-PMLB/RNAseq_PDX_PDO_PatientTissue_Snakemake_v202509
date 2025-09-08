@@ -1,4 +1,4 @@
-To download the singular image
+To download the singularity image
 
 https://quay.io/repository/biocontainers/xengsort?tab=tags
 
