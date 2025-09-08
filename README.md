@@ -108,6 +108,74 @@ Update the `workdir` parameter to point to your working directory.
 The `ref/` directory contains genome FASTA, annotations (GTF), and prebuilt STAR/RSEM indexes.
 Please contact the workflow maintainer to obtain and transfer the reference data to HPC.
 
+#### 2.5 Final Project Structure
+
+After everything is setup, your working directory should have the following structure:
+
+```
+.
+├── config
+│   ├── config.yaml
+│   └── samples.tsv
+├── env
+│   ├── README.md
+│   └── xengsort209.sif
+├── ref
+│   └── genomes
+│       ├── human
+│       │   └── GRCh38
+│       │       ├── GTF
+│       │       │   └── genome.gtf
+│       │       ├── STAR
+│       │       │   └── STAR_GRCh38_150
+│       │       │       ├── Genome
+│       │       │       └── SA
+│       │       ├── downloadGenome.sh
+│       │       ├── genome.fa
+│       │       ├── genome.fa.amb
+│       │       ├── genome.fa.ann
+│       │       ├── genome.fa.bwt
+│       │       ├── genome.fa.pac
+│       │       └── genome.fa.sa
+│       ├── mouse
+│       │   └── grcm38
+│       │       ├── genome.HouseKeepingGenes.bed
+│       │       ├── genome.chrom.sizes
+│       │       ├── genome.dict
+│       │       ├── genome.fasta
+│       │       └── genome.fasta.fai
+│       └── xengsortidx_grcm38_grch38
+│           ├── xengsortidx.hash
+│           └── xengsortidx.info
+├── slurm
+│   ├── CookieCutter.py
+│   ├── __pycache__
+│   │   ├── CookieCutter.cpython-310.pyc
+│   │   └── slurm_utils.cpython-310.pyc
+│   ├── cluster.json
+│   ├── config.yaml
+│   ├── settings.json
+│   ├── slurm-jobscript.sh
+│   ├── slurm-status.py
+│   ├── slurm-submit.py
+│   └── slurm_utils.py
+└── workflow
+    ├── Snakefile
+    ├── rules
+    │   ├── align.smk
+    │   ├── common.smk
+    │   ├── countmatrix.smk
+    │   └── ref.smk
+    └── scripts
+        ├── common
+        │   └── __init__.py
+        ├── count-matrix.py
+        ├── prepare-rsem-reference.py
+        └── rsem-generate-data-matrix-modified.pl
+
+19 directories, 40 files
+```
+
 ---
 
 ## ▶️ Running the Workflow
