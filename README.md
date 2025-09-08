@@ -112,19 +112,25 @@ Please contact the workflow maintainer to obtain and transfer the reference data
 
 ## ▶️ Running the Workflow
 
-### 1. Dry-run (test only, no jobs executed)
+### 1. Activate conda environment
+
+```bash
+mamba activate snakemake6153
+```
+
+### 2. Dry-run (test only, no jobs executed)
 
 ```bash
 snakemake -n -p
 ```
 
-### 2. Run locally with a few cores
+### 3. Run locally with a few cores
 
 ```bash
 snakemake --cores 4
 ```
 
-### 3. Submit to SLURM
+### 4. Submit to SLURM
 
 ```bash
 sbatch scheduler.sh
