@@ -69,6 +69,16 @@ git clone git@github.com:UHN-PMLB/RNAseq_PDX_PDO_PatientTissue_Snakemake_v202509
 ```
 Clone the workflow into home directory first.
 
+### 3. Generate Xengsort Singularity Images (Required for PDX, Optional for PDO, PatientTissue)
+
+[Singularity Image](https://quay.io/repository/biocontainers/xengsort?tab=tags)
+
+```bash
+cd RNAseq_PDX_PDO_PatientTissue_Snakemake_v202509/env
+module load apptainer/1.0.2
+apptainer build xengsort209.sif docker://quay.io/biocontainers/xengsort:2.0.9--pyhdfd78af_0
+```
+
 ### 3. Project Directory Setup
 #### 3.1 Start an interactive session
 
