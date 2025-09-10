@@ -8,7 +8,7 @@
 #SBATCH --mem=2gb
 
 snakemake \
---jobs 40 \
+--jobs 20 \
 --profile slurm \
 --cluster-config slurm/cluster.json \
 --latency-wait 10 \
