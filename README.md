@@ -133,7 +133,20 @@ After everything is setup, your working directory should have the following stru
 │       │       ├── STAR
 │       │       │   └── STAR_GRCh38_150
 │       │       │       ├── Genome
-│       │       │       └── SA
+│       │       │       ├── SA
+│       │       │       ├── SAindex
+│       │       │       ├── chrLength.txt
+│       │       │       ├── chrName.txt
+│       │       │       ├── chrNameLength.txt
+│       │       │       ├── chrStart.txt
+│       │       │       ├── exonGeTrInfo.tab
+│       │       │       ├── exonInfo.tab
+│       │       │       ├── geneInfo.tab
+│       │       │       ├── genomeParameters.txt
+│       │       │       ├── sjdbInfo.txt
+│       │       │       ├── sjdbList.fromGTF.out.tab
+│       │       │       ├── sjdbList.out.tab
+│       │       │       └── transcriptInfo.tab
 │       │       ├── downloadGenome.sh
 │       │       ├── genome.fa
 │       │       ├── genome.fa.amb
