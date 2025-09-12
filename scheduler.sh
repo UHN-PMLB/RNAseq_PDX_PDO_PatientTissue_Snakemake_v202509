@@ -1,6 +1,6 @@
 #! /bin/bash
 #SBATCH -J RNAseq-scheduler
-#SBATCH -t 1-00:00:00
+#SBATCH -t 2-00:00:00
 #SBATCH -N 1
 #SBATCH -n 1
 #SBATCH -c 1
